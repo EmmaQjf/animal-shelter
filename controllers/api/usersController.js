@@ -18,14 +18,7 @@ router.post('/:id, usersCtrl.auth, usersCtrl.deleteUser')
 router.post('/:id, usersCtrl.auth, usersCtrl.showUser')
 */
 
-exports.respondWithToken = function (req, res){
-    res.json(res.locals.data.token)
-}
 
-
-exports.respondWithUser = (req, res) => {
-    res.json(res.locals.data.user)
-}
 
 
 exports.auth = async function (req, res, next) {
@@ -43,21 +36,19 @@ exports.auth = async function (req, res, next) {
       }
 }
 
-exports.signUp = async function(req,res, next) {
+exports.signUp = async function(req,res) {
     try {
         const newUser = await User.create(req.body)
         await newUser.save()
-        const token =  newUser.generateAuthToken()
-        res.locals.data.user = newUser
-        res.locals.data.token = token
-        next()
+        const token = await newUser.generateAuthToken()
+        res.json({newUser, token})
     } catch (error) {
         res.status(400).send({msg: error.message})
     } 
 }
 
 
-exports.logIn = async function(req,res, next) {
+exports.logIn = async function(req,res) {
     try {
         const foundUser = await User.findOne({email: req.body.email})
         const match = bcrypt.compare(foundUser.password,req.body.password)
@@ -65,22 +56,20 @@ exports.logIn = async function(req,res, next) {
             res.status(400).send('Invalid login credentials')
         } else {
             const token = await foundUser.generateAuthToken()
-            res.locals.data.token = token
-            res.locals.data.user = foundUser
-             next()
+            res.json({foundUser,token})
           }  
     } catch (error) {
         res.status(400).send({msg: error.message})
     } 
 }
 
-exports.updateUser = async function(req, res, next) {
+exports.updateUser = async function(req, res) {
     try{
         const updates = Object.keys(req.body)
         updates.forEach(update => req.user[update] = req.body[update])
         await req.user.save()
-        res.locals.data.user = req.user
-        next()
+        res.json(req.user)
+      
       }catch(error){
         res.status(400).json({message: error.message})
       }

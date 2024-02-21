@@ -6,13 +6,13 @@ const usersCtrl = require('../../controllers/api/usersController')
 
 
 //create an user
-router.post('/signup', usersCtrl.signUp, usersCtrl.respondWithToken)
+router.post('/signup', usersCtrl.signUp)
 
 //log in an user
-router.post('/login', usersCtrl.logIn, usersCtrl.respondWithToken)
+router.post('/login', usersCtrl.logIn)
 
 //update an user 
-router.put('/:id', usersCtrl.auth, usersCtrl.updateUser, usersCtrl.respondWithUser)
+router.put('/:id', usersCtrl.auth, usersCtrl.updateUser)
 
 //delete an user 
 router.delete('/:id', usersCtrl.auth, usersCtrl.deleteUser)

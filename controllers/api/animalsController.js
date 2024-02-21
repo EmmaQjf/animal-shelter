@@ -81,7 +81,7 @@ async function updateAnimal(req, res, next) {
 
 async function deleteAnimal(req, res, next) {
     try {
-        const animal = await Animal.deleteOne({_id: req.params.id})
+        const animal = await Animal.findByIdAndDelete(req.params.id)
         req.user.animals.pull(animal)
         req.user.save()
         res.locals.data.animal = animal
