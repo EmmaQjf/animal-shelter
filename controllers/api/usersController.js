@@ -38,10 +38,10 @@ exports.auth = async function (req, res, next) {
 
 exports.signUp = async function(req,res) {
     try {
-        const newUser = await User.create(req.body)
-        await newUser.save()
-        const token = await newUser.generateAuthToken()
-        res.json({newUser, token})
+        const user = await User.create(req.body)
+        await user.save()
+        const token = await user.generateAuthToken()
+        res.json({user, token})
     } catch (error) {
         res.status(400).send({msg: error.message})
     } 
@@ -50,13 +50,13 @@ exports.signUp = async function(req,res) {
 
 exports.logIn = async function(req,res) {
     try {
-        const foundUser = await User.findOne({email: req.body.email})
-        const match = bcrypt.compare(foundUser.password,req.body.password)
-        if (!foundUser || !match) {
+        const user = await User.findOne({email: req.body.email})
+        const match = bcrypt.compare(user.password,req.body.password)
+        if (!user || !match) {
             res.status(400).send('Invalid login credentials')
         } else {
-            const token = await foundUser.generateAuthToken()
-            res.json({foundUser,token})
+            const token = await user.generateAuthToken()
+            res.json({user,token})
           }  
     } catch (error) {
         res.status(400).send({msg: error.message})
@@ -86,8 +86,8 @@ exports.deleteUser = async (req, res) => {
   
   exports.showUser = async (req, res) => {
       try {
-          const foundUser = await User.findById(req.params.id)
-           res.json(foundUser)
+          const user = await User.findById(req.params.id)
+           res.json(user)
       } catch(error) {
           res.status(400).json({message: error.message})
       }
