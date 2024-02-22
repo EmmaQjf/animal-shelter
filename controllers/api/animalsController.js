@@ -58,10 +58,10 @@ async function showAnimal(req, res, next) {
 
 async function createAnimal(req, res, next) {
     try {
+        req.body.user = req.user._id
         const animal = await Animal.create(req.body)
-        const user = req.user
-        user.animals.addToSet(animal)
-        await user.save()
+        req.user.animals.addToSet(animal)
+        req.user.save()
         res.locals.data.animal = animal
         next()
     } catch (error) {
