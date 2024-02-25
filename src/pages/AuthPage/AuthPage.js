@@ -16,9 +16,9 @@ export default function AuthPage(
     const [showLogin, setShowLogin] = useState(true)
     
     return (
-        <> 
-        <button 
-        onClick = {()=>{setShowLogin(!showLogin)}}>
+        <div className={styles.body} > 
+        <button className={styles.button}
+        onClick = {()=>{console.log(showLogin); setShowLogin(!showLogin);console.log(showLogin)}}>
             {showLogin? 'Do not have an account? Please click to create one': 
             "Already have an account? Please click to log in"}</button>
 
@@ -27,6 +27,6 @@ export default function AuthPage(
              <LoginForm setToken={setToken} setUser={setUser} login={login} user={user} /> :
              <SignUpForm setToken={setToken} setUser={setUser} signUp={signUp} user={user} />
         }
-        </>
+        </div>
     )
 }

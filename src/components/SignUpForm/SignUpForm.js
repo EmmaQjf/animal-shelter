@@ -13,8 +13,8 @@ export default function SignUpForm(
         setUser({...user, [e.target.name]: e.target.value})
     }
     return (
-        <>
-        <input 
+        <div className={styles.div}>
+        <input className={styles.input}
         placeholder='name'
         type='text'
         name='name'
@@ -22,7 +22,7 @@ export default function SignUpForm(
         onChange = {handleCredentials}
         />
 
-        <input 
+        <input className={styles.input}
         placeholder='email'
         type='email'
         name='email'
@@ -31,7 +31,7 @@ export default function SignUpForm(
         />
 
 
-        <input 
+        <input className={styles.input}
         placeholder='password'
         type='password'
         name='password'
@@ -39,10 +39,10 @@ export default function SignUpForm(
         onChange = {handleCredentials}
         />
 
-        <button
+        <button className={styles.button}
         onClick={(e)=>{signUp(user)}} 
         > Sign Up</button>
 
-        </>
+        </div>
     )
 }

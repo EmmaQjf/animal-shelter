@@ -17,25 +17,27 @@ export default function LoginForm(
     }
     return (
         <>
-        <form onSubmit={(e)=> {
+        <form className={styles.form}
+        onSubmit={(e)=> {
             e.preventDefault() 
             login(user)}}>
-        <input 
+        <input  className={styles.input}
         placeholder='email'
         type='text'
         name='email'
         value = {user.email}
         onChange = {handleCredentials}
         />
-
-        <input 
+ 
+        <input  className={styles.input}
         placeholder='password'
         type='text'
         name='password'
         //value = {user.password}
         onChange = {handleCredentials}
         />
-        <input type='submit' value='login as an existing user'/> 
+        <input  className={styles.input}
+        type='submit' value='login as an existing user'/> 
 
         </form>
 

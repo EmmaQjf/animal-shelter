@@ -1,0 +1,28 @@
+
+body{
+    text-align: center;
+}
+h1{
+    color: purple
+}
+.form {
+    display:grid;
+    grid-template-columns: 1fr 2fr;
+    justify-items: start;
+    align-items: start;
+    font-size: 1.5rem;
+
+}
+
+.body{
+    font-size:1.5rem
+}
+.input{
+    font-size:1.5rem
+}
+
+.submit{
+    margin-top: 1rem;
+    color: purple;
+    font-size:1.5rem
+}

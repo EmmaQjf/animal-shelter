@@ -39,8 +39,7 @@ export default function UpdataForm(
     const [isChecked, setIsChecked] = useState(false);
     const handleOnCheck = (e) => {
         setIsChecked(!isChecked);
-        isChecked? setFormData({...formData, reservedForAdoption:false})
-        :setFormData({...formData, reservedForAdoption:true})
+        setFormData({...formData, reservedForAdoption:!isChecked})
       }
 
 

@@ -4,6 +4,7 @@
 import { useState, useEffect } from 'react'
 import CreateForm from '../../components/CreateForm/CreateForm'
 import Animals from '../../components/Animals/Animals'
+import styles from './HomePage.module.scss'
 
 export default function HomePage(
     {
@@ -45,7 +46,7 @@ export default function HomePage(
         <>
         <h1>Welcome to the Animal Shelter</h1>
         {
-            showCreateForm?  <CreateForm 
+            showCreateForm ? <CreateForm 
             createAnimal = {createAnimal}
             token ={token}
             //animals={animals}
