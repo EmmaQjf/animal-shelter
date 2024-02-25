@@ -18,7 +18,7 @@ export default function Animals(
         { animals.animals.length? animals.animals.map((animal) => {
            
            return (
-               <div key = {animal._id}>
+               <div className={styles.div} key = {animal._id}>
                <h3>{animal.name}</h3>
                <img src={animal.image} />
                <button ><Link to = {`/animalpage/${animal._id}`}>See more details</Link></button>

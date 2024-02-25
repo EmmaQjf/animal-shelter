@@ -1,0 +1,27 @@
+body{
+    text-align: center;
+}
+h1{
+    color: purple
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.body{
+    font-size:1.5rem
+}
+.input{
+    font-size:1.5rem;
+    margin: 5px 5px 5px 5px
+
+}
+
+.submit{
+    margin-top: 1rem;
+    color: purple;
+    font-size:1.5rem
+}

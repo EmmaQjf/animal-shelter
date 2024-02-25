@@ -5,6 +5,13 @@
     row-gap: 15px;
     justify-items: center;
     align-items: start;
+}
 
-
+.div{
+    margin-top: 2rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
 }

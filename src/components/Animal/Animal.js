@@ -2,6 +2,7 @@
 //     return <h1>This is the individual Animal</h1>
 // }
 //import UpdateForm from '../../components/UpdateForm/UpdateForm'
+import styles from './Animal.module.scss'
 import {useState, useEffect} from 'react'
 
 import {Link} from 'react-router-dom'
@@ -21,8 +22,8 @@ export default function Animal(
         <h3>species: {animal.species}</h3>
         <img src={animal.image} />
         <h3>reservedForAdoption: {answer} </h3>
-        <button onClick={(e)=> deleteAnimal(animal._id, localStorage.token)}>Delete Me</button>
-        <button onClick={(e)=> {
+        <button className={styles.button} onClick={(e)=> deleteAnimal(animal._id, localStorage.token)}>Delete Me</button>
+        <button className={styles.button}  onClick={(e)=> {
             // setShowUpdateForm(!showUpdateForm)
             setShowAnimal(false)
         }}>Update Me</button>

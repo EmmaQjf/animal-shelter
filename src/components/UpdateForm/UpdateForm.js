@@ -3,7 +3,7 @@
 // }
 
 import {useState, useEffect} from 'react'
-
+import styles from './UpdateForm.module.scss'
 export default function UpdataForm(
     {
         animal,
@@ -59,19 +59,18 @@ export default function UpdataForm(
     return (
         <>
         <h1>This is the UPDATE FORM</h1>
-        <h1>This is the UPDATE FORM</h1>
-        <form 
+        <form className={styles.form}
         onSubmit ={handleSubmit}>
-            <input type='text' name='name' spaceholder='name' value={formData.name}
+            <input className={styles.input} type='text' name='name' spaceholder='name' value={formData.name}
             onChange={handleChange}/>
-            <input type='species' name='species' spaceholder='species' value={formData.species}
+            <input className={styles.input} type='species' name='species' spaceholder='species' value={formData.species}
             onChange={handleChange}/>
             {/* <input input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" 
             value={formData.image}
             onChange={handleFileChange}/> */}
-            ReservedForAdoption: <input type="checkbox" value={formData.reservedForAdoption} checked={isChecked}
+            ReservedForAdoption: <input className={styles.input}type="checkbox" value={formData.reservedForAdoption} checked={isChecked}
             onChange={handleOnCheck} />
-            <input type="submit" value='submit'/>
+            <input className={styles.submit}type="submit" value='submit'/>
 
         </form>
 
