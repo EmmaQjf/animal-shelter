@@ -18,12 +18,14 @@ export default function AuthPage(
     return (
         <> 
         <button 
-        onClick = {()=>{setShowLogin(!showLogin),setShowSignUp(!showSignUp)}}>{showLogin? 'PLEASE LOGIN': "Please create a new account"}</button>
+        onClick = {()=>{setShowLogin(!showLogin)}}>
+            {showLogin? 'Do not have an account? Please click to create one': 
+            "Already have an account? Please click to log in"}</button>
 
         {
             showLogin?
              <LoginForm setToken={setToken} setUser={setUser} login={login} user={user} /> :
-             <SignUpForm setToken={setToken} setUser={setUser} login={login} user={user} />
+             <SignUpForm setToken={setToken} setUser={setUser} signUp={signUp} user={user} />
         }
         </>
     )

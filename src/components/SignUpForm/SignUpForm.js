@@ -4,43 +4,43 @@ export default function SignUpForm(
     {
         setToken,
         setUser,
-        signup,
+        signUp,
         user
     }
 
 ){
+    const handleCredentials = (e) => {
+        setUser({...user, [e.target.name]: e.target.value})
+    }
     return (
         <>
         <input 
         placeholder='name'
         type='text'
+        name='name'
         value = {user.name}
-        onChange = {(e) => {
-            setUser({...user, name:e.target.value})
-        }}
+        onChange = {handleCredentials}
         />
 
         <input 
         placeholder='email'
-        type='text'
+        type='email'
+        name='email'
         value = {user.email}
-        onChange = {(e) => {
-            setUser({...user, email:e.target.value})
-        }}
+        onChange = {handleCredentials}
         />
 
 
         <input 
         placeholder='password'
-        type='text'
+        type='password'
+        name='password'
         value = {user.password}
-        onChange={(e) => {
-            setUser({...user, password: e.target.value})
-        }}
+        onChange = {handleCredentials}
         />
 
         <button
-        onClick={signup} 
+        onClick={(e)=>{signUp(user)}} 
         > Sign Up</button>
 
         </>

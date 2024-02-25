@@ -38,7 +38,7 @@ exports.auth = async function (req, res, next) {
 
 exports.signUp = async function(req,res) {
     try {
-        const user = await User.create(req.body)
+        const user = new User(req.body)
         await user.save()
         const token = await user.generateAuthToken()
         res.json({user, token})

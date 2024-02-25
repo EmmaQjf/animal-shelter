@@ -12,29 +12,32 @@ export default function LoginForm(
     }
 
 ){
+    const handleCredentials = (e) => {
+        setUser({...user, [e.target.name]: e.target.value})
+    }
     return (
         <>
+        <form onSubmit={(e)=> {
+            e.preventDefault() 
+            login(user)}}>
         <input 
         placeholder='email'
         type='text'
+        name='email'
         value = {user.email}
-        onChange = {(e) => {
-            setUser({...user, email:e.target.value})
-        }}
+        onChange = {handleCredentials}
         />
 
         <input 
         placeholder='password'
         type='text'
-        value = {user.password}
-        onChange={(e) => {
-            setUser({...user, password: e.target.value})
-        }}
+        name='password'
+        //value = {user.password}
+        onChange = {handleCredentials}
         />
+        <input type='submit' value='login as an existing user'/> 
 
-        <button
-        onClick={login} 
-        > Login </button>
+        </form>
 
         </>
     )
