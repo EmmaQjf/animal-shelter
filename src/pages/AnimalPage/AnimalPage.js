@@ -1,49 +1,83 @@
-export default function AnimalPage(){
-    return <h1>This is an individual Animal Page</h1>
-}
-// import { useParams } from "react-router-dom"
-// import{useState, useEffect} from 'react-router-dom'
 
+import { useParams } from "react-router-dom"
+import{ useState, useEffect } from 'react'
+import Animal from '../../components/Animal/Animal'
+import UpdateForm from '../../components/UpdateForm/UpdateForm'
 
-// export default function AnimalPage(
-//     {
-//         deleteAnimal,
-//         updateAnimal
-//     }
-// ){
-//     const [animal, setAnimal]= useState({
-//         name: '',
-//         species:'',
-//         image:'',
-//         reservedForAdoption: false
-//     }   )
+export default function AnimalPage(
+    {
+        deleteAnimal,
+        updateAnimal
+    }
+){
+    
+    const [animal, setAnimal]= useState({
+        name: '',
+        species:'',
+        image:'',
+        reservedForAdoption: "false"
+    })
 
-//     useEffect(() => {
-//         getAnimalDetails()
-//      },[])
+    // useEffect(()=>{
+    //     const fetchAnimal = async()=> {
+    //         try{
+    //             const data = await getAnimalDetails()
+    //             setAnimal(data)
+    //         } catch(error) {
+    //             console.error(error)
+    //         }
+    //     }
+    //     fetchAnimal()
+    // }, [])
+
+    //   const getAnimalDetails= async() => {
+    //       try {
+    //           const response = await fetch(`/api/animals/${params.id}`)
+    //           const data= await response.json()
+    //           return data
+    //       }  catch(error){
+    //           console.error(error)
+    //       } 
+    //      }
+    
+
+    useEffect(() => {
+        getAnimalDetails()
+     },[])
+
   
-//      // refill the from with the data
-//      // get to the backend to retrieve the data
-//      const getAnimalDetails= async() => {
-//       try {
-//           let data = await fetch(`/api/animals/${params.id}`)
-//           data = await data.json()
-//           setAnimal(data)
-//       }  catch(error){
-//           console.error(error)
-//       } 
-//      }
-//     const params= useParams()
-//     return (
-//         <>
-//         <h3>Name: {animal.name}</h3>
-//         <h3>species: {animal.speices}</h3>
-//         <img src={animal.image} />
-//         <h3>reservedForAdoption: {animal.reservedForAdoption}? Yes: No</h3>
-//         <button onClick={(e)=> deleteAnimal(params.id)}>Delete Me</button>
-//         <button onClick={(e)=> updateAnimal(params.id)}>Delete Me</button>
-//         </>
-//     )
-// }
+     const params= useParams()
 
-// need to revise the updateAnimal 
+   
+     // refill the from with the data
+     // get to the backend to retrieve the data
+     const getAnimalDetails= async() => {
+      try {
+          let data = await fetch(`/api/animals/${params.id}`)
+          data = await data.json()
+          setAnimal(data)
+      }  catch(error){
+          console.error(error)
+      } 
+     }
+     console.log(animal)
+
+     const [showAnimal, setShowAnimal] = useState(true)
+    return (
+        <>
+        {
+            showAnimal? <Animal 
+            animal={animal}
+            deleteAnimal={deleteAnimal}
+            updateAnimal={updateAnimal}
+            setShowAnimal={setShowAnimal}
+            /> 
+            : 
+            <UpdateForm
+            animal={animal}
+            updateAnimal={updateAnimal}
+            setShowAnimal={setShowAnimal} />
+        }
+        </>
+    )
+}

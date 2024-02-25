@@ -101,11 +101,12 @@ export default function App(){
                 body: JSON.stringify(updatedData)
             })
             const updatedAnimal = await response.json()
-            const animalsCopy = [...animals]
-            const index = animalsCopy.findIndex(animal => animal._id === id)
-            // important 
-            animalsCopy[index] = {...animalsCopy[index], ...updatedData}
-            setAnimals(animalsCopy)
+            return updatedAnimal
+            // const animalsCopy = [...animals]
+            // const index = animalsCopy.findIndex(animal => animal._id === id)
+            // // important 
+            // animalsCopy[index] = {...animalsCopy[index], ...updatedData}
+            // setAnimals(animalsCopy)
 
 
         } catch(error){
@@ -123,10 +124,11 @@ export default function App(){
                 }
             })
             const foundAnimal= await response.json()
-            const animalsCopy = [...animals]
-            const index = animalsCopy.findIndex(animal => animal._id === id)
-            animalsCopy.splice(index,1)
-            setAnimals(animalsCopy)
+            return foundAnimal
+            // const animalsCopy = [...animals]
+            // const index = animalsCopy.findIndex(animal => animal._id === id)
+            // animalsCopy.splice(index,1)
+            // setAnimals(animalsCopy)
 
         } catch(error){
             console.error(error)

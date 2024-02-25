@@ -122,11 +122,12 @@ function App() {
         body: JSON.stringify(updatedData)
       });
       const updatedAnimal = await response.json();
-      const animalsCopy = [...animals];
-      const index = animalsCopy.findIndex(animal => animal._id === id);
-      // important 
-      animalsCopy[index] = _objectSpread(_objectSpread({}, animalsCopy[index]), updatedData);
-      setAnimals(animalsCopy);
+      return updatedAnimal;
+      // const animalsCopy = [...animals]
+      // const index = animalsCopy.findIndex(animal => animal._id === id)
+      // // important 
+      // animalsCopy[index] = {...animalsCopy[index], ...updatedData}
+      // setAnimals(animalsCopy)
     } catch (error) {
       console.error(error);
     }
@@ -142,10 +143,11 @@ function App() {
         }
       });
       const foundAnimal = await response.json();
-      const animalsCopy = [...animals];
-      const index = animalsCopy.findIndex(animal => animal._id === id);
-      animalsCopy.splice(index, 1);
-      setAnimals(animalsCopy);
+      return foundAnimal;
+      // const animalsCopy = [...animals]
+      // const index = animalsCopy.findIndex(animal => animal._id === id)
+      // animalsCopy.splice(index,1)
+      // setAnimals(animalsCopy)
     } catch (error) {
       console.error(error);
     }
@@ -196,6 +198,48 @@ function App() {
       deleteAnimal: deleteAnimal
     })
   })));
+}
+
+/***/ }),
+
+/***/ "./src/components/Animal/Animal.js":
+/*!*****************************************!*\
+  !*** ./src/components/Animal/Animal.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Animal)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* provided dependency */ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+// export default function Animal(props) {
+//     return <h1>This is the individual Animal</h1>
+// }
+//import UpdateForm from '../../components/UpdateForm/UpdateForm'
+
+
+function Animal(_ref) {
+  let {
+    animal,
+    deleteAnimal,
+    updateAnimal,
+    setShowAnimal
+  } = _ref;
+  console.log(animal);
+  // const [showUpdateForm, setShowUpdateForm] = useState(false) 
+  const answer = animal.reservedForAdoption ? "yes" : "no";
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", null, "Name: ", animal.name), /*#__PURE__*/React.createElement("h3", null, "species: ", animal.species), /*#__PURE__*/React.createElement("img", {
+    src: animal.image
+  }), /*#__PURE__*/React.createElement("h3", null, "reservedForAdoption: ", answer, " "), /*#__PURE__*/React.createElement("button", {
+    onClick: e => deleteAnimal(animal._id, localStorage.token)
+  }, "Delete Me"), /*#__PURE__*/React.createElement("button", {
+    onClick: e => {
+      // setShowUpdateForm(!showUpdateForm)
+      setShowAnimal(false);
+    }
+  }, "Update Me")));
 }
 
 /***/ }),
@@ -451,6 +495,109 @@ function SignUpForm(_ref) {
 
 /***/ }),
 
+/***/ "./src/components/UpdateForm/UpdateForm.js":
+/*!*************************************************!*\
+  !*** ./src/components/UpdateForm/UpdateForm.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ UpdataForm)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* provided dependency */ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == typeof i ? i : String(i); }
+function _toPrimitive(t, r) { if ("object" != typeof t || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != typeof i) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+// export default function UpdateForm(){
+//     return <h1>This is the UPDATE FORM</h1>
+// }
+
+
+function UpdataForm(_ref) {
+  let {
+    animal,
+    updateAnimal,
+    //setShowUpdateForm
+    setShowAnimal
+  } = _ref;
+  const [formData, setFormData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    name: '',
+    species: '',
+    image: '',
+    reservedForAdoption: "false"
+  });
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    setFormData(animal);
+  }, []);
+  const handleChange = e => {
+    setFormData(_objectSpread(_objectSpread({}, formData), {}, {
+      [e.target.name]: e.target.value
+    }));
+  };
+
+  //upload image
+  const [file, setFile] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  function handleFileChange(e) {
+    console.log(e.target.files);
+    setFile(URL.createObjectURL(e.target.files[0]));
+    setFormData(_objectSpread(_objectSpread({}, formData), {}, {
+      image: e.target.value
+    }));
+  }
+
+  // checkbox
+  const [isChecked, setIsChecked] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const handleOnCheck = e => {
+    setIsChecked(!isChecked);
+    isChecked ? setFormData(_objectSpread(_objectSpread({}, formData), {}, {
+      reservedForAdoption: false
+    })) : setFormData(_objectSpread(_objectSpread({}, formData), {}, {
+      reservedForAdoption: true
+    }));
+  };
+  const handleSubmit = async e => {
+    e.preventDefault();
+    try {
+      await updateAnimal(animal._id, formData, localStorage.token);
+      //setShowUpdateForm(false)
+      setShowAnimal(true);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  console.log(animal);
+  console.log(formData);
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", null, "This is the UPDATE FORM"), /*#__PURE__*/React.createElement("h1", null, "This is the UPDATE FORM"), /*#__PURE__*/React.createElement("form", {
+    onSubmit: handleSubmit
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    name: "name",
+    spaceholder: "name",
+    value: formData.name,
+    onChange: handleChange
+  }), /*#__PURE__*/React.createElement("input", {
+    type: "species",
+    name: "species",
+    spaceholder: "species",
+    value: formData.species,
+    onChange: handleChange
+  }), "ReservedForAdoption: ", /*#__PURE__*/React.createElement("input", {
+    type: "checkbox",
+    value: formData.reservedForAdoption,
+    checked: isChecked,
+    onChange: handleOnCheck
+  }), /*#__PURE__*/React.createElement("input", {
+    type: "submit",
+    value: "submit"
+  })));
+}
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -481,55 +628,79 @@ root.render( /*#__PURE__*/React.createElement(react__WEBPACK_IMPORTED_MODULE_0__
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ AnimalPage)
 /* harmony export */ });
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_Animal_Animal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/Animal/Animal */ "./src/components/Animal/Animal.js");
+/* harmony import */ var _components_UpdateForm_UpdateForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/UpdateForm/UpdateForm */ "./src/components/UpdateForm/UpdateForm.js");
 /* provided dependency */ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-function AnimalPage() {
-  return /*#__PURE__*/React.createElement("h1", null, "This is an individual Animal Page");
+
+
+
+
+function AnimalPage(_ref) {
+  let {
+    deleteAnimal,
+    updateAnimal
+  } = _ref;
+  const [animal, setAnimal] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    name: '',
+    species: '',
+    image: '',
+    reservedForAdoption: "false"
+  });
+
+  // useEffect(()=>{
+  //     const fetchAnimal = async()=> {
+  //         try{
+  //             const data = await getAnimalDetails()
+  //             setAnimal(data)
+  //         } catch(error) {
+  //             console.error(error)
+  //         }
+  //     }
+  //     fetchAnimal()
+  // }, [])
+
+  //   const getAnimalDetails= async() => {
+  //       try {
+  //           const response = await fetch(`/api/animals/${params.id}`)
+  //           const data= await response.json()
+  //           return data
+  //       }  catch(error){
+  //           console.error(error)
+  //       } 
+  //      }
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    getAnimalDetails();
+  }, []);
+  const params = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useParams)();
+
+  // refill the from with the data
+  // get to the backend to retrieve the data
+  const getAnimalDetails = async () => {
+    try {
+      let data = await fetch("/api/animals/".concat(params.id));
+      data = await data.json();
+      setAnimal(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  console.log(animal);
+  const [showAnimal, setShowAnimal] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
+  return /*#__PURE__*/React.createElement(React.Fragment, null, showAnimal ? /*#__PURE__*/React.createElement(_components_Animal_Animal__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    animal: animal,
+    deleteAnimal: deleteAnimal,
+    updateAnimal: updateAnimal,
+    setShowAnimal: setShowAnimal
+  }) : /*#__PURE__*/React.createElement(_components_UpdateForm_UpdateForm__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    animal: animal,
+    updateAnimal: updateAnimal,
+    setShowAnimal: setShowAnimal
+  }));
 }
-// import { useParams } from "react-router-dom"
-// import{useState, useEffect} from 'react-router-dom'
-
-// export default function AnimalPage(
-//     {
-//         deleteAnimal,
-//         updateAnimal
-//     }
-// ){
-//     const [animal, setAnimal]= useState({
-//         name: '',
-//         species:'',
-//         image:'',
-//         reservedForAdoption: false
-//     }   )
-
-//     useEffect(() => {
-//         getAnimalDetails()
-//      },[])
-
-//      // refill the from with the data
-//      // get to the backend to retrieve the data
-//      const getAnimalDetails= async() => {
-//       try {
-//           let data = await fetch(`/api/animals/${params.id}`)
-//           data = await data.json()
-//           setAnimal(data)
-//       }  catch(error){
-//           console.error(error)
-//       } 
-//      }
-//     const params= useParams()
-//     return (
-//         <>
-//         <h3>Name: {animal.name}</h3>
-//         <h3>species: {animal.speices}</h3>
-//         <img src={animal.image} />
-//         <h3>reservedForAdoption: {animal.reservedForAdoption}? Yes: No</h3>
-//         <button onClick={(e)=> deleteAnimal(params.id)}>Delete Me</button>
-//         <button onClick={(e)=> updateAnimal(params.id)}>Delete Me</button>
-//         </>
-//     )
-// }
-
-// need to revise the updateAnimal
 
 /***/ }),
 
@@ -1187,4 +1358,4 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=App.c17a60e79149ee7dac3e5ccd58ef0f62.js.map
+//# sourceMappingURL=App.e0c074fd03c06d343fa6b10a42f6e1e9.js.map

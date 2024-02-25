@@ -1,21 +1,44 @@
-export default function Animal(props) {
-    return <h1>This is the individual Animal</h1>
-}
+// export default function Animal(props) {
+//     return <h1>This is the individual Animal</h1>
+// }
+//import UpdateForm from '../../components/UpdateForm/UpdateForm'
+import {useState, useEffect} from 'react'
 
-/*
-import {link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 export default function Animal(
-    {animal}
+    {animal,
+    deleteAnimal,
+    updateAnimal,
+    setShowAnimal}
 ){
+    console.log(animal)
+    // const [showUpdateForm, setShowUpdateForm] = useState(false) 
+    const answer = animal.reservedForAdoption? "yes": "no"
     return (
         <>
-        <div key = {animal._id}>
-                <h3>{animal.name}</h3>
-                <img src={props.movie.Poster} />
-                <button link to ={`/animalpage/${animal._id}`} >See more details</button>
-                <div>
-        <>
-    )
+        <div>
+        <h3>Name: {animal.name}</h3>
+        <h3>species: {animal.species}</h3>
+        <img src={animal.image} />
+        <h3>reservedForAdoption: {answer} </h3>
+        <button onClick={(e)=> deleteAnimal(animal._id, localStorage.token)}>Delete Me</button>
+        <button onClick={(e)=> {
+            // setShowUpdateForm(!showUpdateForm)
+            setShowAnimal(false)
+        }}>Update Me</button>
+        </div>
 
+       {/* <div>
+        {
+            showUpdateForm?
+             <UpdateForm 
+             animal={animal}
+             updateAnimal={updateAnimal}
+             setShowUpdateForm ={setShowUpdateForm}
+            />: <></>
+        }
+        </div> */}
+        </>
+
+    )
 }
-*/
