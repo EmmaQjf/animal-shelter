@@ -1,8 +1,8 @@
+
+@import "../CreateForm/CreateForm.module.scss";
+
 .button {
-    margin-top: 2rem;
-    color: purple;
-    size: 2rem;
-    font-size: 2rem;
+    @include buttonStyle()
 }
 
 body{

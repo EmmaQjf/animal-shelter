@@ -1,3 +1,7 @@
+@import "../CreateForm/CreateForm.module.scss";
+
+
+
 body{
     text-align: center;
 }
@@ -20,8 +24,7 @@ h1{
 
 }
 
-.submit{
-    margin-top: 1rem;
-    color: purple;
-    font-size:1.5rem
+.button{
+    @include buttonStyle()
+    
 }

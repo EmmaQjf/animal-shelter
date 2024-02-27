@@ -27,6 +27,7 @@ export default function Animal(
             // setShowUpdateForm(!showUpdateForm)
             setShowAnimal(false)
         }}>Update Me</button>
+        <button className={styles.button}><Link to ={'/'}>Home</Link></button>
         </div>
 
        {/* <div>

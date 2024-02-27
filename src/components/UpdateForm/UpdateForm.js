@@ -4,6 +4,7 @@
 
 import {useState, useEffect} from 'react'
 import styles from './UpdateForm.module.scss'
+import {Link} from 'react-router-dom'
 export default function UpdataForm(
     {
         animal,
@@ -70,9 +71,10 @@ export default function UpdataForm(
             onChange={handleFileChange}/> */}
             ReservedForAdoption: <input className={styles.input}type="checkbox" value={formData.reservedForAdoption} checked={isChecked}
             onChange={handleOnCheck} />
-            <input className={styles.submit}type="submit" value='submit'/>
+            <input className={styles.button}type="submit" value='submit'/>
 
         </form>
+        <button className={styles.button}><Link to ={'/'}>Home</Link></button>
 
         </>
     )

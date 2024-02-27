@@ -7,13 +7,11 @@ import styles from './Animals.module.scss'
 export default function Animals(
     animals
 ){
-    console.log(animals)
+
     return(
         <div>
         <h2>This is a list of all the animals</h2>
-        <h2>{animals.animals.length}</h2>
-
-
+       
         <div className={styles.animalGrid}>
         { animals.animals.length? animals.animals.map((animal) => {
            

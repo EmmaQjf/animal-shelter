@@ -214,6 +214,7 @@ function App() {
 /* harmony import */ var _Animal_module_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Animal.module.scss */ "./src/components/Animal/Animal.module.scss");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 /* provided dependency */ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 // export default function Animal(props) {
 //     return <h1>This is the individual Animal</h1>
@@ -243,7 +244,11 @@ function Animal(_ref) {
       // setShowUpdateForm(!showUpdateForm)
       setShowAnimal(false);
     }
-  }, "Update Me")));
+  }, "Update Me"), /*#__PURE__*/React.createElement("button", {
+    className: _Animal_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].button
+  }, /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+    to: '/'
+  }, "Home"))));
 }
 
 /***/ }),
@@ -266,8 +271,7 @@ function Animal(_ref) {
 
 
 function Animals(animals) {
-  console.log(animals);
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", null, "This is a list of all the animals"), /*#__PURE__*/React.createElement("h2", null, animals.animals.length), /*#__PURE__*/React.createElement("div", {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", null, "This is a list of all the animals"), /*#__PURE__*/React.createElement("div", {
     className: _Animals_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].animalGrid
   }, animals.animals.length ? animals.animals.map(animal => {
     return /*#__PURE__*/React.createElement("div", {
@@ -309,7 +313,7 @@ function _toPrimitive(t, r) { if ("object" != typeof t || !t) return t; var e = 
 function CreateForm(_ref) {
   let {
     createAnimal
-    //animals,
+    //animals
     // setAnimals,
     // token
   } = _ref;
@@ -356,12 +360,30 @@ function CreateForm(_ref) {
   //upload image
   const [file, setFile] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('');
   function handleFileChange(e) {
-    console.log(e.target.files);
-    setFile(URL.createObjectURL(e.target.files[0]));
+    const selectedFile = e.target.files[0];
+    const fileUrl = URL.createObjectURL(selectedFile);
+    setFile(fileUrl); // Update file state with the URL
+
+    // Update animal state with the image file
     setAnimal(_objectSpread(_objectSpread({}, animal), {}, {
-      image: file
+      image: fileUrl
     }));
   }
+  // if (e.target.input.files.length) {
+  //     const upload_file = e.target.input.files[0];
+  //     setFile(upload_file)
+  //     const formData = new FormData();
+  //     formData.append('file', upload_file);
+
+  //     const request = axios.post(this.props.cfg_url+'/upload', formData)
+  //         .then(function(response){
+  //             console.log('successfully uploaded', upload_file);
+  //         });
+  //         setAnimal({...animal, image:file})
+  // } else {
+  //     console.log('You need to select a file');
+  // }
+
   return /*#__PURE__*/React.createElement("div", {
     className: _CreateForm_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].body
   }, /*#__PURE__*/React.createElement("h2", null, " Create a new animal profile"), /*#__PURE__*/React.createElement("form", {
@@ -402,7 +424,7 @@ function CreateForm(_ref) {
     checked: isChecked,
     onChange: handleOnCheck
   })), /*#__PURE__*/React.createElement("input", {
-    className: _CreateForm_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].submit,
+    className: _CreateForm_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].button,
     type: "submit",
     value: "submit"
   })));
@@ -501,8 +523,11 @@ function SignUpForm(_ref) {
       [e.target.name]: e.target.value
     }));
   };
-  return /*#__PURE__*/React.createElement("div", {
-    className: _SignUpForm_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].div
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("form", {
+    className: _SignUpForm_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].form,
+    onSubmit: e => {
+      signUp(user);
+    }
   }, /*#__PURE__*/React.createElement("input", {
     className: _SignUpForm_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].input,
     placeholder: "name",
@@ -524,12 +549,11 @@ function SignUpForm(_ref) {
     name: "password",
     value: user.password,
     onChange: handleCredentials
-  }), /*#__PURE__*/React.createElement("button", {
-    className: _SignUpForm_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].button,
-    onClick: e => {
-      signUp(user);
-    }
-  }, " Sign Up"));
+  }), /*#__PURE__*/React.createElement("input", {
+    className: _SignUpForm_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].input,
+    type: "submit",
+    value: "Sign Up"
+  })));
 }
 
 /***/ }),
@@ -546,6 +570,7 @@ function SignUpForm(_ref) {
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _UpdateForm_module_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UpdateForm.module.scss */ "./src/components/UpdateForm/UpdateForm.module.scss");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 /* provided dependency */ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
@@ -555,6 +580,7 @@ function _toPrimitive(t, r) { if ("object" != typeof t || !t) return t; var e = 
 // export default function UpdateForm(){
 //     return <h1>This is the UPDATE FORM</h1>
 // }
+
 
 
 
@@ -634,10 +660,14 @@ function UpdataForm(_ref) {
     checked: isChecked,
     onChange: handleOnCheck
   }), /*#__PURE__*/React.createElement("input", {
-    className: _UpdateForm_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].submit,
+    className: _UpdateForm_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].button,
     type: "submit",
     value: "submit"
-  })));
+  })), /*#__PURE__*/React.createElement("button", {
+    className: _UpdateForm_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].button
+  }, /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+    to: '/'
+  }, "Home")));
 }
 
 /***/ }),
@@ -937,18 +967,50 @@ ___CSS_LOADER_EXPORT___.locals = {
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, `.oLDiJlg0yBuKGjThTM9L {
-  margin-top: 2rem;
+___CSS_LOADER_EXPORT___.push([module.id, `body {
+  text-align: center;
+}
+
+h1 {
   color: purple;
-  size: 2rem;
-  font-size: 2rem;
+}
+
+.s9_wG97lgpsE7imutSPq {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  justify-items: start;
+  align-items: start;
+  font-size: 1.5rem;
+}
+
+.YI7rwRGGJ9U0sJFwAPqE {
+  font-size: 1.5rem;
+}
+
+.YZQTsGubiEY5zDpUKtIK {
+  font-size: 1.5rem;
+}
+
+.oLDiJlg0yBuKGjThTM9L {
+  margin-top: 1rem;
+  color: purple;
+  font-size: 1.5rem;
+}
+
+.oLDiJlg0yBuKGjThTM9L {
+  margin-top: 1rem;
+  color: purple;
+  font-size: 1.5rem;
 }
 
 body {
   font-size: 1.5rem;
-}`, "",{"version":3,"sources":["webpack://./src/components/Animal/Animal.module.scss"],"names":[],"mappings":"AAAA;EACI,gBAAA;EACA,aAAA;EACA,UAAA;EACA,eAAA;AACJ;;AAEA;EACI,iBAAA;AACJ","sourcesContent":[".button {\n    margin-top: 2rem;\n    color: purple;\n    size: 2rem;\n    font-size: 2rem;\n}\n\nbody{\n    font-size: 1.5rem;\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/components/CreateForm/CreateForm.module.scss","webpack://./src/components/Animal/Animal.module.scss"],"names":[],"mappings":"AAMA;EACI,kBAAA;ACLJ;;ADOA;EACI,aAAA;ACJJ;;ADMA;EACI,aAAA;EACA,8BAAA;EACA,oBAAA;EACA,kBAAA;EACA,iBAAA;ACHJ;;ADOA;EACI,iBAAA;ACJJ;;ADMA;EACI,iBAAA;ACHJ;;ADMA;EA3BI,gBAAA;EACA,aAAA;EACA,iBAAA;ACyBJ;;AAzBA;EDFI,gBAAA;EACA,aAAA;EACA,iBAAA;AC+BJ;;AA3BA;EACI,iBAAA;AA8BJ","sourcesContent":["@mixin buttonStyle{\n    margin-top: 1rem;\n    color: purple;\n    font-size:1.5rem\n}\n\nbody{\n    text-align: center;\n}\nh1{\n    color: purple\n}\n.form {\n    display:grid;\n    grid-template-columns: 1fr 2fr;\n    justify-items: start;\n    align-items: start;\n    font-size: 1.5rem;\n\n}\n\n.body{\n    font-size:1.5rem\n}\n.input{\n    font-size:1.5rem\n}\n\n.button{\n    @include buttonStyle()\n}","\n@import \"../CreateForm/CreateForm.module.scss\";\n\n.button {\n    @include buttonStyle()\n}\n\nbody{\n    font-size: 1.5rem;\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
+	"form": `s9_wG97lgpsE7imutSPq`,
+	"body": `YI7rwRGGJ9U0sJFwAPqE`,
+	"input": `YZQTsGubiEY5zDpUKtIK`,
 	"button": `oLDiJlg0yBuKGjThTM9L`
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
@@ -1044,17 +1106,17 @@ h1 {
   font-size: 1.5rem;
 }
 
-.UVrwdCauJblY0jGXe5mP {
+.vTCM0vBqVHL0vrZ4YHw9 {
   margin-top: 1rem;
   color: purple;
   font-size: 1.5rem;
-}`, "",{"version":3,"sources":["webpack://./src/components/CreateForm/CreateForm.module.scss"],"names":[],"mappings":"AACA;EACI,kBAAA;AAAJ;;AAEA;EACI,aAAA;AACJ;;AACA;EACI,aAAA;EACA,8BAAA;EACA,oBAAA;EACA,kBAAA;EACA,iBAAA;AAEJ;;AAEA;EACI,iBAAA;AACJ;;AACA;EACI,iBAAA;AAEJ;;AACA;EACI,gBAAA;EACA,aAAA;EACA,iBAAA;AAEJ","sourcesContent":["\nbody{\n    text-align: center;\n}\nh1{\n    color: purple\n}\n.form {\n    display:grid;\n    grid-template-columns: 1fr 2fr;\n    justify-items: start;\n    align-items: start;\n    font-size: 1.5rem;\n\n}\n\n.body{\n    font-size:1.5rem\n}\n.input{\n    font-size:1.5rem\n}\n\n.submit{\n    margin-top: 1rem;\n    color: purple;\n    font-size:1.5rem\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/components/CreateForm/CreateForm.module.scss"],"names":[],"mappings":"AAMA;EACI,kBAAA;AALJ;;AAOA;EACI,aAAA;AAJJ;;AAMA;EACI,aAAA;EACA,8BAAA;EACA,oBAAA;EACA,kBAAA;EACA,iBAAA;AAHJ;;AAOA;EACI,iBAAA;AAJJ;;AAMA;EACI,iBAAA;AAHJ;;AAMA;EA3BI,gBAAA;EACA,aAAA;EACA,iBAAA;AAyBJ","sourcesContent":["@mixin buttonStyle{\n    margin-top: 1rem;\n    color: purple;\n    font-size:1.5rem\n}\n\nbody{\n    text-align: center;\n}\nh1{\n    color: purple\n}\n.form {\n    display:grid;\n    grid-template-columns: 1fr 2fr;\n    justify-items: start;\n    align-items: start;\n    font-size: 1.5rem;\n\n}\n\n.body{\n    font-size:1.5rem\n}\n.input{\n    font-size:1.5rem\n}\n\n.button{\n    @include buttonStyle()\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"form": `IDidpD4zfMJc7O08fYjm`,
 	"body": `of2v8VlkynnVuJ67Lb0D`,
 	"input": `eRWThHngXIkP05RfBkNr`,
-	"submit": `UVrwdCauJblY0jGXe5mP`
+	"button": `vTCM0vBqVHL0vrZ4YHw9`
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1092,7 +1154,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.vV2j9lqAwBSPnC0Y7rzW {
   font-size: 2rem;
   margin: 5px 5px 5px 5px;
   color: purple;
-}`, "",{"version":3,"sources":["webpack://./src/components/LoginForm/loginForm.module.scss"],"names":[],"mappings":"AAAA;EACI,gBAAA;EACA,aAAA;EACA,sBAAA;EACA,uBAAA;EACA,mBAAA;EACA,eAAA;AACJ;;AAEA;EACI,eAAA;EACA,uBAAA;EACA,aAAA;AACJ","sourcesContent":[".form{\n    margin-top: 2rem;\n    display:flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    font-size: 1rem;\n}\n\n.input{\n    font-size: 2rem;\n    margin: 5px 5px 5px 5px;\n    color: purple\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/components/LoginForm/loginForm.module.scss"],"names":[],"mappings":"AACI;EACI,gBAAA;EACA,aAAA;EACA,sBAAA;EACA,uBAAA;EACA,mBAAA;EACA,eAAA;AAAR;;AAGI;EACI,eAAA;EACA,uBAAA;EACA,aAAA;AAAR","sourcesContent":["\n    .form{\n        margin-top: 2rem;\n        display:flex;\n        flex-direction: column;\n        justify-content: center;\n        align-items: center;\n        font-size: 1rem;\n    }\n    \n    .input{\n        font-size: 2rem;\n        margin: 5px 5px 5px 5px;\n        color: purple\n    }\n\n"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"form": `vV2j9lqAwBSPnC0Y7rzW`,
@@ -1121,7 +1183,7 @@ ___CSS_LOADER_EXPORT___.locals = {
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, `.xzzXXm4dcE52MsMCxVUU {
+___CSS_LOADER_EXPORT___.push([module.id, `.fFzangV2xm2t8P5WmvJN {
   margin-top: 2rem;
   display: flex;
   flex-direction: column;
@@ -1134,19 +1196,11 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.xzzXXm4dcE52MsMCxVUU {
   font-size: 2rem;
   margin: 5px 5px 5px 5px;
   color: purple;
-}
-
-.xyMV8WMo_VF047TUcQck {
-  margin-top: 2rem;
-  color: purple;
-  size: 2rem;
-  font-size: 2rem;
-}`, "",{"version":3,"sources":["webpack://./src/components/SignUpForm/SignUpForm.module.scss"],"names":[],"mappings":"AAAA;EACI,gBAAA;EACA,aAAA;EACA,sBAAA;EACA,uBAAA;EACA,mBAAA;EACA,eAAA;AACJ;;AAEA;EACI,eAAA;EACA,uBAAA;EACA,aAAA;AACJ;;AAEA;EACI,gBAAA;EACA,aAAA;EACA,UAAA;EACA,eAAA;AACJ","sourcesContent":[".div{\n    margin-top: 2rem;\n    display:flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    font-size: 1rem;\n}\n\n.input{\n    font-size: 2rem;\n    margin: 5px 5px 5px 5px;\n    color: purple\n}\n\n.button {\n    margin-top: 2rem;\n    color: purple;\n    size: 2rem;\n    font-size: 2rem;\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/components/LoginForm/LoginForm.module.scss","webpack://./src/components/SignUpForm/SignUpForm.module.scss"],"names":[],"mappings":"AACI;EACI,gBAAA;EACA,aAAA;EACA,sBAAA;EACA,uBAAA;EACA,mBAAA;EACA,eAAA;ACAR;;ADGI;EACI,eAAA;EACA,uBAAA;EACA,aAAA;ACAR","sourcesContent":["\n    .form{\n        margin-top: 2rem;\n        display:flex;\n        flex-direction: column;\n        justify-content: center;\n        align-items: center;\n        font-size: 1rem;\n    }\n    \n    .input{\n        font-size: 2rem;\n        margin: 5px 5px 5px 5px;\n        color: purple\n    }\n\n",".form {\n  margin-top: 2rem;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  font-size: 1rem;\n}\n\n.input {\n  font-size: 2rem;\n  margin: 5px 5px 5px 5px;\n  color: purple;\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
-	"div": `xzzXXm4dcE52MsMCxVUU`,
-	"input": `z8ybQdgVv2RK52kCD4yt`,
-	"button": `xyMV8WMo_VF047TUcQck`
+	"form": `fFzangV2xm2t8P5WmvJN`,
+	"input": `z8ybQdgVv2RK52kCD4yt`
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1180,6 +1234,36 @@ h1 {
 }
 
 .amP0Wab3ZCfouglH4fKc {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  justify-items: start;
+  align-items: start;
+  font-size: 1.5rem;
+}
+
+.QDm0z4MiXMqofiCE2dJe {
+  font-size: 1.5rem;
+}
+
+.I96i3dWpAfXugzV8Ocji {
+  font-size: 1.5rem;
+}
+
+.m6m2Dm9QMMOPHgmYPWQj {
+  margin-top: 1rem;
+  color: purple;
+  font-size: 1.5rem;
+}
+
+body {
+  text-align: center;
+}
+
+h1 {
+  color: purple;
+}
+
+.amP0Wab3ZCfouglH4fKc {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1195,17 +1279,17 @@ h1 {
   margin: 5px 5px 5px 5px;
 }
 
-.Mckkd_rZ7expievjjZD8 {
+.m6m2Dm9QMMOPHgmYPWQj {
   margin-top: 1rem;
   color: purple;
   font-size: 1.5rem;
-}`, "",{"version":3,"sources":["webpack://./src/components/UpdateForm/UpdateForm.module.scss"],"names":[],"mappings":"AAAA;EACI,kBAAA;AACJ;;AACA;EACI,aAAA;AAEJ;;AAAA;EACI,aAAA;EACA,sBAAA;EACA,uBAAA;EACA,mBAAA;AAGJ;;AAAA;EACI,iBAAA;AAGJ;;AADA;EACI,iBAAA;EACA,uBAAA;AAIJ;;AAAA;EACI,gBAAA;EACA,aAAA;EACA,iBAAA;AAGJ","sourcesContent":["body{\n    text-align: center;\n}\nh1{\n    color: purple\n}\n.form{\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n\n.body{\n    font-size:1.5rem\n}\n.input{\n    font-size:1.5rem;\n    margin: 5px 5px 5px 5px\n\n}\n\n.submit{\n    margin-top: 1rem;\n    color: purple;\n    font-size:1.5rem\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/components/CreateForm/CreateForm.module.scss","webpack://./src/components/UpdateForm/UpdateForm.module.scss"],"names":[],"mappings":"AAMA;EACI,kBAAA;ACLJ;;ADOA;EACI,aAAA;ACJJ;;ADMA;EACI,aAAA;EACA,8BAAA;EACA,oBAAA;EACA,kBAAA;EACA,iBAAA;ACHJ;;ADOA;EACI,iBAAA;ACJJ;;ADMA;EACI,iBAAA;ACHJ;;ADMA;EA3BI,gBAAA;EACA,aAAA;EACA,iBAAA;ACyBJ;;AAxBA;EACI,kBAAA;AA2BJ;;AAzBA;EACI,aAAA;AA4BJ;;AA1BA;EACI,aAAA;EACA,sBAAA;EACA,uBAAA;EACA,mBAAA;AA6BJ;;AA1BA;EACI,iBAAA;AA6BJ;;AA3BA;EACI,iBAAA;EACA,uBAAA;AA8BJ;;AA1BA;EDzBI,gBAAA;EACA,aAAA;EACA,iBAAA;ACuDJ","sourcesContent":["@mixin buttonStyle{\n    margin-top: 1rem;\n    color: purple;\n    font-size:1.5rem\n}\n\nbody{\n    text-align: center;\n}\nh1{\n    color: purple\n}\n.form {\n    display:grid;\n    grid-template-columns: 1fr 2fr;\n    justify-items: start;\n    align-items: start;\n    font-size: 1.5rem;\n\n}\n\n.body{\n    font-size:1.5rem\n}\n.input{\n    font-size:1.5rem\n}\n\n.button{\n    @include buttonStyle()\n}","@import \"../CreateForm/CreateForm.module.scss\";\n\n\n\nbody{\n    text-align: center;\n}\nh1{\n    color: purple\n}\n.form{\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n\n.body{\n    font-size:1.5rem\n}\n.input{\n    font-size:1.5rem;\n    margin: 5px 5px 5px 5px\n\n}\n\n.button{\n    @include buttonStyle()\n    \n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"form": `amP0Wab3ZCfouglH4fKc`,
 	"body": `QDm0z4MiXMqofiCE2dJe`,
 	"input": `I96i3dWpAfXugzV8Ocji`,
-	"submit": `Mckkd_rZ7expievjjZD8`
+	"button": `m6m2Dm9QMMOPHgmYPWQj`
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1963,4 +2047,4 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=App.c8c1aa6eb753a1478b6f5e2384a21468.js.map
+//# sourceMappingURL=App.517ce1112adcf29b15169fa8315e935c.js.map

@@ -5,8 +5,8 @@ import styles from './CreateForm.module.scss'
 import {useState} from 'react'
 export default function CreateForm(
     {
-        createAnimal
-        //animals,
+        createAnimal,
+       //animals
        // setAnimals,
        // token
     }
@@ -58,10 +58,28 @@ export default function CreateForm(
       //upload image
       const [file, setFile] = useState('');
       function handleFileChange(e) {
-          console.log(e.target.files);
-          setFile(URL.createObjectURL(e.target.files[0]));
-          setAnimal({...animal, image:file})
+        const selectedFile = e.target.files[0];
+        const fileUrl = URL.createObjectURL(selectedFile);
+        setFile(fileUrl); // Update file state with the URL
+    
+        // Update animal state with the image file
+        setAnimal({...animal, image: fileUrl});
       }
+            // if (e.target.input.files.length) {
+            //     const upload_file = e.target.input.files[0];
+            //     setFile(upload_file)
+            //     const formData = new FormData();
+            //     formData.append('file', upload_file);
+    
+            //     const request = axios.post(this.props.cfg_url+'/upload', formData)
+            //         .then(function(response){
+            //             console.log('successfully uploaded', upload_file);
+            //         });
+            //         setAnimal({...animal, image:file})
+            // } else {
+            //     console.log('You need to select a file');
+            // }
+    
 
      
 
@@ -93,7 +111,7 @@ export default function CreateForm(
             onChange={handleOnCheck} />
            </div>
             <input
-            className={styles.submit}
+            className={styles.button}
              type="submit" value='submit'/>
         </form>
         </div>

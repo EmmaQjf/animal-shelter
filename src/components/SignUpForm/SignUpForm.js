@@ -13,7 +13,9 @@ export default function SignUpForm(
         setUser({...user, [e.target.name]: e.target.value})
     }
     return (
-        <div className={styles.div}>
+        <div >
+            <form className={styles.form}
+            onSubmit = {(e)=>{signUp(user)}}>
         <input className={styles.input}
         placeholder='name'
         type='text'
@@ -39,10 +41,13 @@ export default function SignUpForm(
         onChange = {handleCredentials}
         />
 
-        <button className={styles.button}
+        <input className={styles.input}
+        type='submit' value='Sign Up'/>
+        {/* <button className={styles.button}
         onClick={(e)=>{signUp(user)}} 
-        > Sign Up</button>
+        > Sign Up</button> */}
 
+        </form>
         </div>
     )
 }
